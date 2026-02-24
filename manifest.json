@@ -1,0 +1,22 @@
+{
+  "name": "Калькулятор жира и специй",
+  "short_name": "Meat Calculator",
+  "description": "Калькулятор для расчёта пропорций мяса, жира и специй",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#667eea",
+  "theme_color": "#4CAF50",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
