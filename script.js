@@ -84,7 +84,7 @@ function calculateValues() {
   showResult(`Перец = ${roundTo(pepper, 1)} г`);
   showResult(`Говядина = ${roundTo(beef, 1)} г`);
   showResult(`Солевой раствор = ${roundTo(saltSolution, 1)} г`);
-  showResult(`Ожидаемая масса готового фарша = ${roundTo(expectedMincedMeatWeight, 1)} г`);
+  showResult(`Ожидаемая масса готового фарша (В ПРОЦЕССЕ) = ${roundTo(expectedMincedMeatWeight, 1)} г`);
 }
 
 function showResult(text) {
@@ -111,3 +111,4 @@ document.querySelectorAll('input').forEach(input => {
     }
   });
 });
+
