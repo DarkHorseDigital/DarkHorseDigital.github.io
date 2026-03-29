@@ -78,13 +78,13 @@ function calculateValues() {
   const expectedMincedMeatWeight = (ov + pepper + beef + saltSolution) - WEIGHT_LOSS;
 
   // Вывод результатов
-  showResult(`Коэффициент = ${roundTo(coeff, 3)}`);
+  //showResult(`Коэффициент = ${roundTo(coeff, 3)}`);
   showResult(`Добавленный жир = ${roundTo(addedFat, 1)} г`);
-  showResult(`Масса жира и мякоти = ${roundTo(ov, 1)} г`);
+  //showResult(`Масса жира и мякоти = ${roundTo(ov, 1)} г`);
   showResult(`Перец = ${roundTo(pepper, 1)} г`);
   showResult(`Говядина = ${roundTo(beef, 1)} г`);
   showResult(`Солевой раствор = ${roundTo(saltSolution, 1)} г`);
-  showResult(`Ожидаемая масса готового фарша (В ПРОЦЕССЕ) = ${roundTo(expectedMincedMeatWeight, 1)} г`);
+  //showResult(`Ожидаемая масса готового фарша (В ПРОЦЕССЕ) = ${roundTo(expectedMincedMeatWeight, 1)} г`);
 }
 
 function showResult(text) {
