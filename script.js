@@ -101,11 +101,12 @@ function calculateValues() {
   }
 
   // Вывод результатов
-  showResult(`Кол-во соли на 750 г воды = ${saltQuantity} г`); // Новый результат
   showResult(`Добавленный жир = ${roundTo(addedFat, 1)} г`);
+  showResult(`Кол-во соли на 750 г воды = ${saltQuantity} г`); // Новый результат
+  showResult(`Солевой раствор = ${roundTo(saltSolution, 1)} г`);
   showResult(`Перец = ${roundTo(pepper, 1)} г`);
   showResult(`Говядина = ${roundTo(beef, 1)} г`);
-  showResult(`Солевой раствор = ${roundTo(saltSolution, 1)} г`);
+  
   
 }
 
