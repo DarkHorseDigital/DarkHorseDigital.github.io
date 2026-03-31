@@ -28,13 +28,14 @@ function calculateValues() {
   const beefFat = parseFloat(document.getElementById('beefFat').value);
   const beefLean = parseFloat(document.getElementById('beefLean').value);
   const leanWeight = parseFloat(document.getElementById('leanWeight').value);
+  const saltInFat = parseFloat(document.getElementById('saltInFat').value); // Новое поле
 
   // Очищаем область результатов
   const resultsDiv = document.getElementById('results');
   resultsDiv.innerHTML = '';
 
   // Валидация
-  if (!beefFat || !beefLean || !leanWeight) {
+  if (!beefFat || !beefLean || !leanWeight || isNaN(saltInFat)) {
     showError('Ошибка: заполните все поля');
     return;
   }
@@ -46,6 +47,11 @@ function calculateValues() {
 
   if (leanWeight <= 100) {
     showError('Ошибка: масса мякоти должна быть больше 100 г');
+    return;
+  }
+
+  if (saltInFat < 0 || saltInFat > 2.55) {
+    showError('Ошибка: соль в жире должна быть в диапазоне 0–2.55 %');
     return;
   }
 
@@ -77,15 +83,30 @@ function calculateValues() {
   // Ожидаемый вес фарша с потерей 50 г
   const expectedMincedMeatWeight = (ov + pepper + beef + saltSolution) - WEIGHT_LOSS;
 
+  // Расчёт количества соли на 750 г воды
+  let saltQuantity;
+  const n = saltInFat;
+
+  if (n >= 0.00 && n <= 0.89) {
+    saltQuantity = 105;
+  } else if (n >= 0.90 && n <= 1.19) {
+    saltQuantity = 100;
+  } else if (n >= 1.20 && n <= 2.09) {
+    saltQuantity = 95;
+  } else if (n >= 2.10 && n <= 2.24) {
+    saltQuantity = 90;
+  } else if (n >= 2.25 && n <= 2.55) {
+    saltQuantity = 85;
+  }
+
   // Вывод результатов
-  //showResult(`Коэффициент = ${roundTo(coeff, 3)}`);
   showResult(`Добавленный жир = ${roundTo(addedFat, 1)} г`);
-  //showResult(`Масса жира и мякоти = ${roundTo(ov, 1)} г`);
   showResult(`Перец = ${roundTo(pepper, 1)} г`);
   showResult(`Говядина = ${roundTo(beef, 1)} г`);
   showResult(`Солевой раствор = ${roundTo(saltSolution, 1)} г`);
-  //showResult(`Ожидаемая масса готового фарша (В ПРОЦЕССЕ) = ${roundTo(expectedMincedMeatWeight, 1)} г`);
+  showResult(`Кол-во соли на 750 г воды = ${saltQuantity}`); // Новый результат
 }
+
 
 function showResult(text) {
   const resultsDiv = document.getElementById('results');
