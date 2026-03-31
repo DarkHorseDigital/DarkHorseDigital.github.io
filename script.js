@@ -25,10 +25,11 @@ function roundTo(value, decimalPlaces) {
 
 function calculateValues() {
   // Получаем значения из полей ввода
+  const saltInFat = parseFloat(document.getElementById('saltInFat').value); // Новое поле
   const beefFat = parseFloat(document.getElementById('beefFat').value);
   const beefLean = parseFloat(document.getElementById('beefLean').value);
   const leanWeight = parseFloat(document.getElementById('leanWeight').value);
-  const saltInFat = parseFloat(document.getElementById('saltInFat').value); // Новое поле
+  
 
   // Очищаем область результатов
   const resultsDiv = document.getElementById('results');
@@ -100,11 +101,12 @@ function calculateValues() {
   }
 
   // Вывод результатов
+  showResult(`Кол-во соли на 750 г воды = ${saltQuantity} г`); // Новый результат
   showResult(`Добавленный жир = ${roundTo(addedFat, 1)} г`);
   showResult(`Перец = ${roundTo(pepper, 1)} г`);
   showResult(`Говядина = ${roundTo(beef, 1)} г`);
   showResult(`Солевой раствор = ${roundTo(saltSolution, 1)} г`);
-  showResult(`Кол-во соли на 750 г воды = ${saltQuantity}`); // Новый результат
+  
 }
 
 
