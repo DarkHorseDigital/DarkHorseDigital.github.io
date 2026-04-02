@@ -3,6 +3,11 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js')
       .then(function(registration) {
         console.log('ServiceWorker зарегистрирован: ', registration);
+
+        navigator.serviceWorker.ready.then(registration => {
+  registration.update();
+});
+        
       })
       .catch(function(error) {
         console.log('Ошибка регистрации ServiceWorker: ', error);
