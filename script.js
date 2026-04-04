@@ -91,14 +91,13 @@ function calculateValues() {
   // Расчёт количества соли на 750 г воды (линейный)
   let saltQuantity;
   const n = saltInFat;
+  let isHighSalt = false;
 
   if (n > 2.55) {
     // Обработка значений больше 2.55
     const estimatedSalt = Math.max(85 - (n - 2.55) * 10, 0);
-
-    showError('Содержание соли в жире слишком высокое!');
-    showResult(`<span style="color: gray;">Предполагаемое кол-во соли на 750 г воды: ${roundTo(estimatedSalt, 1)} г</span>`);
-    return;
+    saltQuantity = roundTo(estimatedSalt, 1);
+    isHighSalt = true;
   } else if (n >= 0.00 && n <= 2.55) {
     // Линейная интерполяция
     saltQuantity = 105 - (n / 2.55) * 20;
@@ -106,12 +105,19 @@ function calculateValues() {
   }
 
   // Вывод результатов
+  if (isHighSalt) {
+    showError('Содержание соли в жире слишком высокое!');
+    showResult(`Кол-во соли на 750 г воды (предполагаемое) = ${saltQuantity} г`);
+  } else {
+    showResult(`Кол-во соли на 750 г воды = ${saltQuantity} г`);
+  }
+
   showResult(`Добавленный жир = ${roundTo(addedFat, 1)} г`);
-  showResult(`Кол-во соли на 750 г воды = ${saltQuantity} г`);
   showResult(`Солевой раствор = ${roundTo(saltSolution, 1)} г`);
   showResult(`Перец = ${roundTo(pepper, 1)} г`);
   showResult(`Говядина = ${roundTo(beef, 1)} г`);
 }
+
 
 
 
