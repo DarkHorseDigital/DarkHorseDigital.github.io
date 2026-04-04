@@ -34,7 +34,6 @@ function calculateValues() {
   const beefFat = parseFloat(document.getElementById('beefFat').value);
   const beefLean = parseFloat(document.getElementById('beefLean').value);
   const leanWeight = parseFloat(document.getElementById('leanWeight').value);
-  
 
   // Очищаем область результатов
   const resultsDiv = document.getElementById('results');
@@ -56,8 +55,8 @@ function calculateValues() {
     return;
   }
 
-  if (saltInFat < 0 || saltInFat > 2.55) {
-    showError('Ошибка: соль в жире должна быть в диапазоне 0–2.55 %');
+  if (saltInFat < 0) {
+    showError('Ошибка: соль в жире должна быть не меньше 0 %');
     return;
   }
 
@@ -89,31 +88,31 @@ function calculateValues() {
   // Ожидаемый вес фарша с потерей 50 г
   const expectedMincedMeatWeight = (ov + pepper + beef + saltSolution) - WEIGHT_LOSS;
 
-  // Расчёт количества соли на 750 г воды
+  // Расчёт количества соли на 750 г воды (линейный)
   let saltQuantity;
   const n = saltInFat;
 
-  if (n >= 0.00 && n <= 0.89) {
-    saltQuantity = 105;
-  } else if (n >= 0.90 && n <= 1.19) {
-    saltQuantity = 100;
-  } else if (n >= 1.20 && n <= 2.09) {
-    saltQuantity = 95;
-  } else if (n >= 2.10 && n <= 2.24) {
-    saltQuantity = 90;
-  } else if (n >= 2.25 && n <= 2.55) {
-    saltQuantity = 85;
+  if (n > 2.55) {
+    // Обработка значений больше 2.55
+    const estimatedSalt = Math.max(85 - (n - 2.55) * 10, 0);
+
+    showError('Содержание соли в жире слишком высокое!');
+    showResult(`<span style="color: gray;">Предполагаемое кол-во соли на 750 г воды: ${roundTo(estimatedSalt, 1)} г</span>`);
+    return;
+  } else if (n >= 0.00 && n <= 2.55) {
+    // Линейная интерполяция
+    saltQuantity = 105 - (n / 2.55) * 20;
+    saltQuantity = roundTo(saltQuantity, 1);
   }
 
   // Вывод результатов
   showResult(`Добавленный жир = ${roundTo(addedFat, 1)} г`);
-  showResult(`Кол-во соли на 750 г воды = ${saltQuantity} г`); // Новый результат
+  showResult(`Кол-во соли на 750 г воды = ${saltQuantity} г`);
   showResult(`Солевой раствор = ${roundTo(saltSolution, 1)} г`);
   showResult(`Перец = ${roundTo(pepper, 1)} г`);
   showResult(`Говядина = ${roundTo(beef, 1)} г`);
-  
-  
 }
+
 
 
 function showResult(text) {
