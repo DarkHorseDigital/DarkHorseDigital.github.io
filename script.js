@@ -106,7 +106,7 @@ function calculateValues() {
 
   // Вывод результатов
   if (isHighSalt) {
-    showError('Содержание соли в жире слишком высокое!');
+    showError('Содержание соли в жире слишком высокое! Сообщите старшему технологу!');
     showResult(`Кол-во соли на 750 г воды (предполагаемое) = ${saltQuantity} г`);
   } else {
     showResult(`Кол-во соли на 750 г воды = ${saltQuantity} г`);
