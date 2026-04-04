@@ -1,4 +1,4 @@
-const CACHE_NAME = 'meat-calculator-v2'; // Увеличьте версию при обновлении
+const CACHE_NAME = 'meat-calculator-v3'; // Увеличьте версию при обновлении
 
 self.addEventListener('install', function(event) {
   event.waitUntil(
